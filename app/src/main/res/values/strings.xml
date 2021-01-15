@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MessageApp</string>
     <string name="btnSend">Send</string>
+    <string name="btnHistory">History</string>
 </resources>
