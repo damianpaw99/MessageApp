@@ -3,28 +3,23 @@ package edu.ib.messageapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+
 public class HistoryActivity extends AppCompatActivity {
-    ArrayList<HistoryItem> history = new ArrayList<>();
+    private ArrayList<HistoryItem> history = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
-        Intent intent=getIntent();
 
         RecyclerView rvHistory = (RecyclerView) findViewById(R.id.rvHistory);
         File fileDirectory = new File(String.valueOf(getExternalFilesDir(MainActivity.MESSAGES_FOLDER)));
@@ -39,7 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
                         stringBuilder.append((char) data);
                         data = is.read();
                     }
-                    history.add(new HistoryItem(stringBuilder.toString(), files[i].getName().split("\\.")[0]));
+                    history.add(0,new HistoryItem(stringBuilder.toString(), files[i].getName().split("\\.")[0]));
                 } catch (FileNotFoundException e) {
                     Log.e(MainActivity.TAG, e.toString());
                 } catch (IOException e) {
@@ -53,4 +48,5 @@ public class HistoryActivity extends AppCompatActivity {
         rvHistory.setAdapter(historyAdapter);
         rvHistory.setLayoutManager(new LinearLayoutManager(this));
     }
+
 }
